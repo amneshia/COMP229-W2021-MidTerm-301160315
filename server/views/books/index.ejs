@@ -4,11 +4,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
-          <h3>Favourite Books List </h3>
+          <h3>Favourite Books List</h3>
           <!-- ------------------------ -->
           <!-- FIX THE ADD BUTTON BELOW -->
           <!-- ------------------------ -->
-          <a href="" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
+          <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
           <br>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
@@ -24,26 +24,24 @@
                 </thead>
                 <tbody>
                 <!-- Template Row -->
-                <% for (let count = 0; count < books.length; count++) { %>
+                <% books.forEach (book => { %>
                 <tr>
-                  <td><%= books[count].Title %></td>
-                  <td class="text-center">$<%= books[count].Price %></td>
-                  <td class="text-center"><%= books[count].Author %></td>
-                  <td class="text-center"><%= books[count].Genre %></td>
+                  <td><%= book.Title %></td>
+                  <td class="text-center">$<%= book.Price %></td>
+                  <td class="text-center"><%= book.Author %></td>
+                  <td class="text-center"><%= book.Genre %></td>
 
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the EDIT BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/<%= book._id %>" class="btn btn-primary"><i class="far fa-edit"></i></i>Edit</a>
                   </td>
 
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the DELETE BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <form method="post" action="books/delete/<%= book._id %>" enctype="application/x-www-form-urlencoded">
+                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</button>
+                    </form>
                   </td>
                 </tr>
-                <% } %>
+                <% }); %>
               </tbody>
             </table>
           </div>
