@@ -4,6 +4,8 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let flash = require('connect-flash'); //new
+let session = require('express-session'); //new
 
 // import "mongoose" - required for DB Access
 let mongoose = require('mongoose');
@@ -14,7 +16,7 @@ mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTo
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-mongoDB.once('open', ()=> {
+mongoDB.once('open', () => {
   console.log("Connected to MongoDB...");
 });
 
@@ -34,8 +36,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({secret : "dbz"})); //new
+app.use(flash()); //new
 app.use(express.static(path.join(__dirname, '../../client')));
 
+//Add the `flash` local variable for access within the views
+app.use((req,res,next) => {
+  res.locals.request = req;
+  next();
+}); //new
 
 // route redirects
 app.use('/', index);
