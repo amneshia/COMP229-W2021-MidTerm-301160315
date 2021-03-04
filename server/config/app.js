@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, '../../client')));
 
 //Add the `flash` local variable for access within the views
 app.use((req,res,next) => {
-  res.locals.request = req;
+  res.locals.flash = (...args) => req.flash(...args);
   next();
 }); //new
 
