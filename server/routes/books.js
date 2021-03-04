@@ -15,7 +15,7 @@ const matchNonEmpty = msg => {
     negated: true
   }
 };
-// Validator middleware used by "POST=books/add" and "POST=books/:d".
+// Validator middleware used by "POST=/books/add" and "POST=/books/:id".
 const bookFormValidation = checkSchema({
   Title: {
     isLength: {
