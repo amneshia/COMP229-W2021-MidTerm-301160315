@@ -47,7 +47,7 @@ const bookFormValidation = checkSchema({
   Genre: {
     isLength: {
       trim: true,
-      errorMessage: 'Book\'s Genre must have atleast 1 character.',
+      errorMessage: 'Book\'s genre must have atleast 1 character.',
       options: { min: 1 }
     },
     matches : matchNonEmpty('Book\'s Genre')
